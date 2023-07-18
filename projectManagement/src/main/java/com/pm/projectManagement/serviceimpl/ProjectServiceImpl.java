@@ -24,6 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project createProject(Project project) {
+        System.out.println(project);
         return projectRepo.save(project);
     }
 
@@ -39,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project updateProject(Long id, Project ProjectDetails) {
-        Project project = projectRepo.findById(id).orElse(null);
+        Project project = projectRepo.findById(id).orElseThrow(() -> new RuntimeException("Project not found with id: " + id));
         if (project != null) {
             project.setProjectName(ProjectDetails.getProjectName());
             project.setProjectDescription(ProjectDetails.getProjectDescription());
@@ -64,8 +65,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Task createTaskByProjectId(Long id, Task task) {
-        Project project = projectRepo.findById(id).orElseThrow(()-> new RuntimeException("id not found"));
-        task.setProject(project);
-        return taskrepo.save(task);
+        return null;
     }
+
+//    @Override
+//    public Task createTaskByProjectId(Long id, Task task) {
+//        Project project = projectRepo.findById(id).orElseThrow(()-> new RuntimeException("Id not found"));
+//        project.setTaskList(task);
+//        return taskrepo.save(project.setTaskList(List<task> taskList));
+//    }
 }

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000" ,maxAge =3600)
 @RestController
 public class ProjectController {
 
@@ -61,10 +61,9 @@ public class ProjectController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
 	@GetMapping("/api/projects/{id}/tasks")
 	public ResponseEntity<List<Task>> updateTask(@PathVariable long id) {
-			return new ResponseEntity<List<Task>>(projectService.getTaskByProjectId(id),HttpStatus.OK);
+		return new ResponseEntity<List<Task>>(projectService.getTaskByProjectId(id),HttpStatus.OK);
 	}
 
 	@PostMapping("/api/projects/{id}/tasks")
@@ -72,4 +71,14 @@ public class ProjectController {
 		return new ResponseEntity<>(projectService.createTaskByProjectId(id, task),HttpStatus.CREATED);
 
 	}
+
+//	@GetMapping("/api/projects/{projectId}/tasks")
+//	public ResponseEntity<List<Task>> updateTask(@PathVariable long projectId) {
+//			return new ResponseEntity<List<Task>>(projectService.getTaskByProjectId(projectId),HttpStatus.OK);
+//	}
+
+//	@PostMapping("/api/projects/{id}/tasks")
+//	public ResponseEntity<Project> createTask(@PathVariable long id, @RequestBody Task task) {
+//		return new ResponseEntity<>(projectService.createTaskByProjectId(id, task),HttpStatus.CREATED);
+//	}
 }

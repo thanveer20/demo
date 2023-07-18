@@ -20,7 +20,7 @@ public class Task {
     private String status;
     
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project")
     private Project project;
 
     public Project getProject() {

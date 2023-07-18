@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
+//@Table(name = "")
 
 public class Project {
 
@@ -17,10 +19,18 @@ public class Project {
 	private String projectDescription;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 
-	private String projectStartDate;
+	private Date projectStartDate;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	private String projectEndDate;
-	
+	private Date projectEndDate;
+
+	public List<Task> getTaskList() {
+		return taskList;
+	}
+
+	public void setTaskList(List<Task> taskList) {
+		this.taskList = taskList;
+	}
+
 	@OneToMany(mappedBy = "project",cascade = CascadeType.ALL)
 	private List<Task> taskList=new ArrayList<>();
 	
@@ -48,24 +58,24 @@ public class Project {
 		this.projectDescription = projectDescription;
 	}
 
-	public String getProjectStartDate() {
+	public Date getProjectStartDate() {
 		return projectStartDate;
 	}
 
-	public void setProjectStartDate(String projectStartDate) {
+	public void setProjectStartDate(Date projectStartDate) {
 		this.projectStartDate = projectStartDate;
 	}
 
-	public String getProjectEndDate() {
+	public Date getProjectEndDate() {
 		return projectEndDate;
 	}
 
-	public void setProjectEndDate(String projectEndDate) {
+	public void setProjectEndDate(Date projectEndDate) {
 		this.projectEndDate = projectEndDate;
 	}
 
-	public Project(long projectId, String projectName, String projectDescription, String projectStartDate,
-			String projectEndDate) {
+	public Project(long projectId, String projectName, String projectDescription, Date projectStartDate,
+			Date projectEndDate) {
 		super();
 		this.projectId = projectId;
 		this.projectName = projectName;
